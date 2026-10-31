@@ -1,27 +1,171 @@
 diff --git a/README.md b/README.md
-index 3a5f2d1..7c9e4b2 100644
+index 7c9e4b2..91f3a88 100644
 --- a/README.md
 +++ b/README.md
-@@ -1,6 +1,10 @@
--# github_IA-inference
--Exemple de workflow GitHub Actions utilisant Copilot CLI pour exécuter une inférence IA.
-+# github_IA-inference
-+Projet démonstratif permettant d’exécuter des inférences IA dans GitHub Actions
-+via le GitHub Copilot CLI.
+@@ -1,10 +1,18 @@
+ # github_IA-inference
+-Projet démonstratif permettant d’exécuter des inférences IA dans GitHub Actions
+-via le GitHub Copilot CLI.
++Template GitHub permettant d’exécuter des inférences IA dans GitHub Actions
++via le GitHub Copilot CLI. Ce projet inclut désormais un workflow avancé,
++des prompts structurés, un système de variables injectées, et un diff complet
++pour tester les capacités d’analyse IA.
 
-+## Nouveautés
-+- Ajout d’un dossier `.github/prompts/` contenant des fichiers de prompt.
-+- Ajout du workflow `ai-inference.yml`.
+ ## Nouveautés
+ - Ajout d’un dossier `.github/prompts/` contenant des fichiers de prompt.
+ - Ajout du workflow `ai-inference.yml`.
++- Ajout d’un dossier `artifacts/` contenant un diff complet pour les tests IA.
++- Ajout d’un exemple de prompt YAML avec variables et fichiers injectés.
++- Ajout d’un system prompt externe.
++- Réorganisation du README pour plus de clarté.
 
-@@ -20,7 +24,12 @@
- ## Fonctionnalités
+@@ -24,12 +32,20 @@
  - Exécution d’un prompt IA via Copilot CLI
  - Support des prompts inline ou via fichiers
--- Récupération de la réponse IA dans les outputs du workflow
-+- Récupération de la réponse IA dans les outputs du workflow
-+- Support des prompts structurés `.prompt.yml`
+ - Récupération de la réponse IA dans les outputs du workflow
+-- Support des prompts structurés `.prompt.yml`
+-- Support d’un system prompt externe
+-- Ajout d’un fichier `diff.txt` pour les tests d’inférence IA
++- Support des prompts structurés `.prompt.yml` avec variables
 +- Support d’un system prompt externe
-+- Ajout d’un fichier `diff.txt` pour les tests d’inférence IA
++- Injection de fichiers dans les prompts YAML
++- Ajout d’un diff complet pour les tests d’inférence IA
++- Ajout d’un exemple de workflow avancé
+
+ ## Prochaines étapes
+ - Ajouter un exemple d’analyse automatique de Pull Request
++- Ajouter un générateur automatique de changelog via IA
++- Ajouter un résumé automatique des commits
++- Ajouter un audit IA du code source
+
+diff --git a/.github/workflows/ai-inference.yml b/.github/workflows/ai-inference.yml
+index 2f4d1c3..8b2e7d1 100644
+--- a/.github/workflows/ai-inference.yml
++++ b/.github/workflows/ai-inference.yml
+@@ -1,6 +1,10 @@
+ name: AI inference
+ on: workflow_dispatch
++  push:
++    branches:
++      - main
++      - develop
+
+ jobs:
+   inference:
+@@ -20,6 +24,14 @@ jobs:
+       - name: Exécuter l’inférence IA via Copilot
+         id: inference
+         uses: actions/ai-inference@v1
++        with:
++          prompt-file: ./.github/prompts/sample.prompt.yml
++          input: |
++            repo: github_IA-inference
++          file_input: |
++            diff: ./artifacts/diff.txt
++          model: gpt-4.1
+         env:
+           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
+
+@@ -30,3 +42,12 @@ jobs:
+       - name: Afficher la réponse
+         run: echo "${{ steps.inference.outputs.response }}"
+
++      - name: Afficher le fichier de réponse
++        run: |
++          echo "Réponse enregistrée dans : ${{ steps.inference.outputs.response-file }}"
++          cat "${{ steps.inference.outputs.response-file }}"
+
+diff --git a/.github/prompts/sample.prompt.yml b/.github/prompts/sample.prompt.yml
+index 1a2b3c4..4f5e6d7 100644
+--- a/.github/prompts/sample.prompt.yml
++++ b/.github/prompts/sample.prompt.yml
+@@ -1,6 +1,12 @@
+ messages:
+   - role: system
+-    content: Sois concis et précis.
++    content: >
++      Tu es un assistant IA expert en analyse de code, documentation et CI/CD.
++      Fournis des réponses structurées, concises et exploitables.
+
+   - role: user
+-    content: Résume les changements pour {{repo}} en utilisant ce diff :\n{{diff}}
++    content: >
++      Analyse les changements du dépôt {{repo}} en utilisant le diff suivant :
++      ---
++      {{diff}}
++      ---
+ model: gpt-4.1
+
+diff --git a/.github/prompts/system.txt b/.github/prompts/system.txt
+index 0000000..abc1234 100644
+--- /dev/null
++++ b/.github/prompts/system.txt
+@@ -0,0 +1,8 @@
+Tu es un assistant IA spécialisé dans l’analyse de dépôts GitHub.
+Tu fournis des réponses claires, concises et orientées développeur.
+Tu peux résumer, analyser, structurer et proposer des améliorations.
+Tu dois toujours rester factuel, précis et utile.
+Ton objectif est d’aider à comprendre les changements du dépôt.
+
+diff --git a/artifacts/diff.txt b/artifacts/diff.txt
+new file mode 100644
+index 0000000..f1e2d3c
+--- /dev/null
++++ b/artifacts/diff.txt
+@@ -0,0 +1,120 @@
+# Diff complet du projet github_IA-inference
+# Utilisé pour les tests d’inférence IA via Copilot CLI
+
+diff --git a/src/main.py b/src/main.py
+new file mode 100644
+index 0000000..a1b2c3d
+--- /dev/null
++++ b/src/main.py
+@@ -0,0 +1,32 @@
++import json
++import os
 +
-+## Prochaines étapes
-+- Ajouter un exemple d’analyse automatique de Pull Request
++def load_prompt():
++    path = "./.github/prompts/prompt.txt"
++    if not os.path.exists(path):
++        return "Aucun prompt trouvé."
++    with open(path, "r") as f:
++        return f.read()
++
++def main():
++    prompt = load_prompt()
++    print("Prompt chargé :")
++    print(prompt)
++
++if __name__ == "__main__":
++    main()
+
+diff --git a/src/utils.py b/src/utils.py
+new file mode 100644
+index 0000000..d4e5f6a
+--- /dev/null
++++ b/src/utils.py
+@@ -0,0 +1,28 @@
++def format_diff(diff_content: str) -> str:
++    """
++    Formate le contenu d’un diff pour l’analyse IA.
++    """
++    lines = diff_content.split("\n")
++    cleaned = [line for line in lines if not line.startswith("index")]
++    return "\n".join(cleaned)
+
++def extract_added_lines(diff_content: str):
++    return [line for line in diff_content.split("\n") if line.startswith("+")]
+
++def extract_removed_lines(diff_content: str):
++    return [line for line in diff_content.split("\n") if line.startswith("-")]
+
+diff --git a/.gitignore b/.gitignore
+index 1a2b3c4..5d6e7f8 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,3 +1,6 @@
+ node_modules/
++.cache/
++response/
++*.tmp
