@@ -1,0 +1,11 @@
+name: 🧩 Module Request
+description: Demander un nouveau module IA-inference
+title: "[MODULE] "
+labels: ["module"]
+body:
+  - type: textarea
+    id: module
+    attributes:
+      label: Module demandé
+      placeholder: Nom + objectif du module
+      required: true
