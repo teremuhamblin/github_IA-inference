@@ -1,77 +1,64 @@
-## 📦 github_IA-inference
-
-###### 🚀 Exécuter des inférences IA dans GitHub Actions grâce au GitHub Copilot CLI.
-
-》》 Ce projet fournit un exemple complet et fonctionnel montrant comment intégrer l’IA (Copilot) dans vos pipelines CI/CD GitHub. Il démontre comment :
+# github_IA-inference
 ```text
-- installer le Copilot CLI sur un runner GitHub,
-- exécuter une inférence IA,
-- utiliser des prompts inline, des fichiers .txt, ou des prompts structurés .prompt.yml,
-- récupérer la réponse IA dans la sortie du workflow ou dans un fichier temporaire.
+1. Le workflow GitHub Actions se déclenche
+Sur push, pull_request, ou selon ta configuration.
+
+2. Le workflow charge les prompts
+- system.txt  
+- prompt.txt  
+- variables du dépôt  
+- fichiers du commit
+
+3. L’IA analyse le projet
+Elle peut :
+
+- générer un diff,  
+- proposer des améliorations,  
+- restructurer du code,  
+- produire de la documentation,  
+- analyser des modules.
+
+4. Le workflow génère un artefact
+artifacts/diff.txt est créé automatiquement.
+
+5. Le workflow peut commenter la PR
+Avec le résultat de l’analyse IA.
 ```
 
->>Ce dépôt sert de template pour tout développeur souhaitant ajouter une étape IA dans ses workflows GitHub.
+### 🎯 Objectifs du projet
+
+- Automatiser l’analyse IA dans GitHub  
+- Générer des diffs intelligents  
+- Tester des pipelines IA complexes  
+- Standardiser les contributions  
+- Documenter proprement le projet  
+- Créer une base IA modulaire et extensible
 
 ---
 
-### 🧠 Fonctionnalités
+### 📜 Licence — POL‑ULTRA v1.0
+
+- Ta licence personnelle ultra‑juridique :
 ```text
-- Inférence IA via GitHub Copilot CLI
-- Support des modèles : gpt-4.1, claude-sonnet-4.5, etc.
-- Prompts inline, fichiers texte, fichiers YAML structurés
-- System prompt externe
-- Injection de variables et fichiers dans les prompts
-- Récupération de la réponse IA dans un fichier
-- Workflow CI/CD prêt à l’emploi
+- Project : droits absolus, illimités  
+- Utilisateur lambda : lecture, modification, publication  
+- Obligations : attribution, transparence, compatibilité  
+- Interdictions : suppression de licence, revendication de paternité  
+- Aucune garantie, responsabilité limitée  
 ```
 
----
+### 🚀 Conclusion
 
-### 📁 Structure du projet
-
+》》 github_IA‑inference est une plateforme complète d’inférence IA pour GitHub, combinant :
 ```text
-VOIR docs/structure.md
+- prompts IA avancés,  
+- workflow automatisé,  
+- artefacts générés,  
+- documentation technique,  
+- templates professionnels,  
+- licence personnelle solide.
 ```
 
----
-
-### 📤 Sorties
-
-| Nom | Description |
-|------|-------------|
-| response | Texte de la réponse IA |
-| response-file | Chemin du fichier contenant la réponse |
-
-### 🔐 Authentification Copilot CLI
-
-- *Le workflow nécessite* **un token Copilot** :
-
-```markdown
-COPILOT_PAT
-```
-
-- *À ajouter dans* :
-
-》》 **Settings → Secrets → Actions → New secret**
+>> Un projet propre, modulaire, extensible, idéal pour expérimenter et industrialiser des pipelines IA.
 
 ---
-
-### 🎯 Objectif du projet
-
-Ce dépôt sert de modèle pour :
-```text
-- intégrer Copilot IA dans vos workflows GitHub,
-- automatiser des tâches textuelles (résumés, analyses, génération de documentation),
-- démontrer l’usage avancé du Copilot CLI dans CI/CD.
-```
-
->>Il peut être cloné et adapté pour n’importe quel projet nécessitant une étape IA automatisée.
-
----
-
-### 🛠️ Publier une nouvelle version
-
->>Ce projet inclut un script script/release permettant de tagger et publier une nouvelle version de l’action.
-
----
-
