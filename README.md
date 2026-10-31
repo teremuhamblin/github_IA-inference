@@ -1,3 +1,4 @@
+###### README.md >> markdown
 # github_IA-inference
 ```text
 1. Le workflow GitHub Actions se déclenche
@@ -38,7 +39,7 @@ Avec le résultat de l’analyse IA.
 
 ### 📜 Licence — POL‑ULTRA v1.0
 
-- Ta licence personnelle ultra‑juridique :
+- Ta licence personnelle ultra‑juridique
 ```text
 - Project : droits absolus, illimités  
 - Utilisateur lambda : lecture, modification, publication  
@@ -49,7 +50,7 @@ Avec le résultat de l’analyse IA.
 
 ### 🚀 Conclusion
 
-》》 github_IA‑inference est une plateforme complète d’inférence IA pour GitHub, combinant :
+》》 github_IA‑inference est une plateforme complète d’inférence IA pour GitHub, combinant
 ```text
 - prompts IA avancés,  
 - workflow automatisé,  
