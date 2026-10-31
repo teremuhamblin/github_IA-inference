@@ -1,0 +1,6 @@
+jobs:
+  ai-security:
+    uses: teremuhamblin/github_IA-inference/.github/workflows/ai-inference.yml@v1
+    with:
+      prompt-file: .github/prompts/bluteam-defense.prompt.yml
+      task-type: security
