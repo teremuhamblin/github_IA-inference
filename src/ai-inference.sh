@@ -16,6 +16,14 @@ select_model() {
     echo "${MODEL}"
   fi
 }
+if [[ "${MAX_CALLS_PER_WORKFLOW}" -gt 0 ]]; then
+  CURRENT_CALLS=$(cat artifacts/calls.count 2>/dev/null || echo 0)
+  if (( CURRENT_CALLS >= MAX_CALLS_PER_WORKFLOW )); then
+    echo "[COST-GUARD] Limite d'appels IA atteinte (${MAX_CALLS_PER_WORKFLOW})."
+    exit 0
+  fi
+  echo $((CURRENT_CALLS+1)) > artifacts/calls.count
+fi
 
 RESOLVED_MODEL="$(select_model)"
 
