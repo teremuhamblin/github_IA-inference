@@ -1,0 +1,30 @@
+name: AI Self Evaluation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Copilot CLI
+        uses: github/copilot-cli-action@v1
+
+      - name: Main IA
+        run: |
+          copilot exec \
+            --model gpt-4.1 \
+            --prompt-file .github/prompts/sample.prompt.yml \
+            --system-file .github/prompts/system.txt \
+            --output artifacts/output.txt
+
+      - name: Critic IA
+        run: |
+          copilot exec \
+            --model gpt-4.1 \
+            --prompt-file .github/prompts/system.json-output.txt \
+            --system-file .github/prompts/system.json-output.txt \
+            --output artifacts/eval.json
