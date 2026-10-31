@@ -30,23 +30,7 @@
 ### 📁 Structure du projet
 
 ```text
-github_IA-inference/
-│
-├── .github/
-│   ├── workflows/
-│   │   └── ai-inference.yml
-│   └── prompts/
-│       ├── prompt.txt
-│       ├── sample.prompt.yml
-│       └── system.txt
-│
-├── artifacts/
-│   └── diff.txt
-│
-├── docs/
-├── .gitignore
-├── LICENSE 
-└── README.md
+VOIR docs/structure.md
 ```
 
 ---
