@@ -1,0 +1,19 @@
+= Dossier .github
+
+Ce dossier regroupe tous les éléments liés à la gestion, l'automatisation
+et la gouvernance du projet sur GitHub. Il centralise les workflows,
+templates et fichiers nécessaires au bon fonctionnement du dépôt.
+
+== Contenu
+
+* `ISSUE_TEMPLATE/` – Modèles d'issues pour standardiser les rapports.
+* `PULL_REQUEST_TEMPLATE/` – Modèles de pull requests.
+* `workflows/ai-inference.yml` – Workflow d'inférence IA automatisé.
+* `prompts/` – Prompts utilisés par le workflow IA.
+* `github-README.adoc` – Documentation du dossier.
+
+== Rôle
+
+Le dossier `.github` constitue l'infrastructure GitHub du projet :
+automatisation CI/CD, standardisation des contributions, gestion des
+prompts IA et organisation des interactions avec le dépôt.
