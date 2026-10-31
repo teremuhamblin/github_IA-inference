@@ -1,0 +1,18 @@
+= Prompts du système d'inférence IA
+
+Ce dossier contient l'ensemble des prompts utilisés par le système
+d'inférence IA du projet. Ils définissent le comportement, les règles,
+les instructions et les paramètres transmis au moteur d'analyse.
+
+== Contenu
+
+* `prompt.txt` – Prompt principal exécuté par le workflow.
+* `sample.prompt.yml` – Exemple de prompt paramétré avec variables.
+* `system.txt` – Prompt système définissant les règles globales.
+* `README.adoc` – Documentation du dossier.
+
+== Rôle
+
+Les prompts servent de base à l'inférence IA, permettant de générer des
+diffs, analyser le code, produire des transformations ou exécuter des
+instructions automatisées via GitHub Actions.
