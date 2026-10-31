@@ -1,0 +1,42 @@
+name: AI Inference
+description: Layer IA réutilisable pour GitHub Actions
+
+inputs:
+  model:
+    description: Modèle IA
+    required: false
+    default: gpt-4.1
+  prompt-file:
+    description: Fichier de prompt
+    required: true
+  system-file:
+    description: Fichier system prompt
+    required: false
+    default: .github/prompts/system.txt
+  output-path:
+    description: Fichier de sortie
+    required: false
+    default: artifacts/diff.txt
+  task-type:
+    description: Type de tâche (doc, code, security, resume)
+    required: false
+    default: generic
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Copilot CLI
+      uses: github/copilot-cli-action@v1
+
+    - name: Run AI inference
+      shell: bash
+      run: |
+        MODEL="${{ inputs.model }}" \
+        TASK_TYPE="${{ inputs.task-type }}" \
+        bash src/ai_inference.sh \
+          "${{ inputs.prompt-file }}" \
+          "${{ inputs.system-file }}" \
+          "${{ inputs.output-path }}"
