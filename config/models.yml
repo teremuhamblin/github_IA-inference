@@ -1,0 +1,9 @@
+tasks:
+  doc:
+    model: gpt-4.1
+  code:
+    model: gpt-4.1
+  security:
+    model: claude-sonnet-4.5
+  resume:
+    model: gpt-4.1-mini
