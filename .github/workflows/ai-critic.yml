@@ -1,0 +1,31 @@
+name: 🧠 AI Critic Evaluation
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["🤖 AI Inference"]
+    types: [completed]
+
+jobs:
+  critic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Copilot CLI
+        uses: github/copilot-cli-action@v1
+
+      - name: Evaluate AI output
+        run: |
+          copilot exec \
+            --model gpt-4.1 \
+            --prompt "Analyse critique du fichier artifacts/diff.txt" \
+            --output artifacts/eval.txt
+
+      - name: Upload evaluation
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-eval
+          path: artifacts/eval.txt
