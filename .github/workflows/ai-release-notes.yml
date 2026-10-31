@@ -1,0 +1,30 @@
+name: 📝 AI Release Notes
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release_notes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Copilot CLI
+        uses: github/copilot-cli-action@v1
+
+      - name: Generate release notes
+        run: |
+          copilot exec \
+            --model gpt-4.1 \
+            --prompt "Génère des release notes pour la version ${{ github.ref_name }}" \
+            --output artifacts/release_notes_${{ github.ref_name }}.md
+
+      - name: Upload release notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: artifacts/release_notes_${{ github.ref_name }}.md
