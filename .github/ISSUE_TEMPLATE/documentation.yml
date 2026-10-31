@@ -1,0 +1,10 @@
+name: 📚 Documentation
+description: Amélioration ou ajout de documentation
+title: "[DOC] "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Section concernée
+      placeholder: Quel fichier ou dossier doit être documenté ?
