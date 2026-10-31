@@ -1,0 +1,16 @@
+name: GithubApp → IA
+
+on:
+  repository_dispatch:
+    types: [githubapp_pr_context]
+
+jobs:
+  ai:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AI inference
+        uses: teremuhamblin/github_IA-inference/.github/actions/ai-inference@v1
+        with:
+          prompt-file: artifacts/prompt-context.txt
+          task-type: doc
+          output-path: artifacts/pr_review.txt
