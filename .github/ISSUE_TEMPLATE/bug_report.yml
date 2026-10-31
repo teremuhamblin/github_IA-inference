@@ -1,0 +1,31 @@
+name: 🐞 Bug Report
+description: Signaler un bug dans github_IA-inference
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description du bug
+      placeholder: Décris clairement le problème rencontré
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      placeholder: "1. ...\n2. ...\n3. ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportement attendu
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Console
+      render: shell
