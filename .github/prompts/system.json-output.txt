@@ -1,0 +1,7 @@
+Tu DOIS répondre exclusivement en JSON valide, avec la structure suivante :
+{
+  "summary": "...",
+  "risks": ["..."],
+  "recommendations": ["..."]
+}
+Ne mets aucun texte en dehors du JSON.
