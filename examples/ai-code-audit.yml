@@ -1,0 +1,20 @@
+name: AI Code Audit (matrix)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        model: [gpt-4.1, claude-sonnet-4.5]
+
+    steps:
+      - name: AI inference (matrix)
+        uses: teremuhamblin/github_IA-inference/.github/actions/ai-inference@v1
+        with:
+          model: ${{ matrix.model }}
+          prompt-file: .github/prompts/security-audit.prompt.yml
+          task-type: security
+          output-path: artifacts/audit_${{ matrix.model }}.txt
