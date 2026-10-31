@@ -1,0 +1,6 @@
+echo "{
+  \"model\": \"${RESOLVED_MODEL}\",
+  \"tokens_max\": \"${MAX_TOKENS}\",
+  \"calls_used\": \"$(cat artifacts/calls.count 2>/dev/null || echo 1)\",
+  \"tier\": \"${MODEL_TIER}\"
+}" > artifacts/cost.json
