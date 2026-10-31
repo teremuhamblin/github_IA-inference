@@ -1,0 +1,6 @@
+task: "security"
+instructions: |
+  Analyse ce playbook défensif et propose :
+  - améliorations
+  - détection avancée
+  - corrélation SIEM
