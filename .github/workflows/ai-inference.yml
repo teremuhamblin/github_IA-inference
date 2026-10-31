@@ -1,31 +1,37 @@
-name: 🤖 AI Inference
+name: Reusable AI Inference
 
 on:
-  workflow_dispatch:
-  push:
-    branches: ["main"]
+  workflow_call:
+    inputs:
+      model:
+        required: false
+        type: string
+        default: gpt-4.1
+      prompt-file:
+        required: true
+        type: string
+      system-file:
+        required: false
+        type: string
+        default: .github/prompts/system.txt
+      output-path:
+        required: false
+        type: string
+        default: artifacts/diff.txt
+      task-type:
+        required: false
+        type: string
+        default: generic
 
 jobs:
-  inference:
+  ai:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Copilot CLI
-        uses: github/copilot-cli-action@v1
-
-      - name: Run AI inference
-        run: |
-          copilot exec \
-            --model gpt-4.1 \
-            --prompt-file .github/prompts/sample.prompt.yml \
-            --system-file .github/prompts/system.txt \
-            --output artifacts/diff.txt
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: AI inference
+        uses: teremuhamblin/github_IA-inference/.github/actions/ai-inference@v1
         with:
-          name: ai-output
-          path: artifacts/diff.txt
+          model: ${{ inputs.model }}
+          prompt-file: ${{ inputs.prompt-file }}
+          system-file: ${{ inputs.system-file }}
+          output-path: ${{ inputs.output-path }}
+          task-type: ${{ inputs.task-type }}
