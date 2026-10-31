@@ -1,0 +1,6 @@
+jobs:
+  ai-security:
+    uses: teremuhamblin/github_IA-inference/.github/workflows/ai-inference.yml@v1
+    with:
+      prompt-file: .github/prompts/redteam-audit.prompt.yml
+      task-type: security
