@@ -1,0 +1,27 @@
+diff --git a/README.md b/README.md
+index 3a5f2d1..7c9e4b2 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,10 @@
+-# github_IA-inference
+-Exemple de workflow GitHub Actions utilisant Copilot CLI pour exécuter une inférence IA.
++# github_IA-inference
++Projet démonstratif permettant d’exécuter des inférences IA dans GitHub Actions
++via le GitHub Copilot CLI.
+
++## Nouveautés
++- Ajout d’un dossier `.github/prompts/` contenant des fichiers de prompt.
++- Ajout du workflow `ai-inference.yml`.
+
+@@ -20,7 +24,12 @@
+ ## Fonctionnalités
+ - Exécution d’un prompt IA via Copilot CLI
+ - Support des prompts inline ou via fichiers
+-- Récupération de la réponse IA dans les outputs du workflow
++- Récupération de la réponse IA dans les outputs du workflow
++- Support des prompts structurés `.prompt.yml`
++- Support d’un system prompt externe
++- Ajout d’un fichier `diff.txt` pour les tests d’inférence IA
++
++## Prochaines étapes
++- Ajouter un exemple d’analyse automatique de Pull Request
