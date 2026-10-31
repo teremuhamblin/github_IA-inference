@@ -1,0 +1,10 @@
+name: 🧪 Test Request
+description: Demander un test ou une validation IA
+title: "[TEST] "
+labels: ["tests"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte
+      placeholder: Quel module ou workflow doit être testé ?
