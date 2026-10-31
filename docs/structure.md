@@ -24,7 +24,7 @@ github_IA-inference/
 │   ├── structure.md
 │   ├── architecture.md 
 ├── .gitignore
-├── LICENSE 
+├── LICENSE.md
 └── README.md
 ```
 
