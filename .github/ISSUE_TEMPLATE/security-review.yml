@@ -1,0 +1,17 @@
+name: 🔐 Security Review
+description: Demander une analyse de sécurité IA
+title: "[SECURITY] "
+labels: ["security"]
+body:
+  - type: textarea
+    id: target
+    attributes:
+      label: Cible
+      placeholder: Fichier, workflow, script à analyser
+      required: true
+
+  - type: textarea
+    id: concerns
+    attributes:
+      label: Points sensibles
+      placeholder: Vulnérabilités suspectées, risques potentiels
