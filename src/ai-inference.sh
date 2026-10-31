@@ -8,7 +8,9 @@ MODEL="${MODEL:-gpt-4.1}"
 TASK_TYPE="${TASK_TYPE:-generic}"
 
 CONFIG_FILE="config/models.yml"
-
+if [[ "${MODEL_TIER}" == "low-cost" ]]; then
+  MODEL="gpt-4.1-mini"
+fi
 select_model() {
   if command -v yq >/dev/null 2>&1; then
     yq ".tasks.${TASK_TYPE}.model // \"${MODEL}\"" "${CONFIG_FILE}"
