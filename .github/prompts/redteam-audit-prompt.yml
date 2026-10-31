@@ -1,0 +1,7 @@
+task: "security"
+instructions: |
+  Analyse ce script offensif et identifie :
+  - vecteurs d’attaque
+  - risques
+  - améliorations
+  - détection possible par BLUETeam
