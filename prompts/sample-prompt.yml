@@ -1,0 +1,6 @@
+messages:
+  - role: system
+    content: Sois concis et précis.
+  - role: user
+    content: Résume les changements pour {{repo}} en utilisant ce diff :\n{{diff}}
+model: gpt-4.1
